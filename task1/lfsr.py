@@ -1,19 +1,4 @@
-from sys import stdout, stderr
-
-
-def wri_fale (file_name,mass):
-    fale = open (file_name,"a")
-    fale.write (str(mass)+ "\n")
-    fale.close()
-
-
-def monitor (i,n):
-    stderr.write('Генерация ' + str(i) + '/' + str(n) + '\n')
-
-
-def d_m (i,m_d):
-    tmp = i % m_d
-    return  tmp
+from help import *
 
 
 def main(f_name_out,m_d,n,args):
@@ -27,7 +12,7 @@ def main(f_name_out,m_d,n,args):
             m_d = int(m_d)
         p, a, x, s = list(map(int, args))
         if a < 0 or x < 0 or p < 0 or s < 0:
-            stdout.write('Ошибка\n')
+            print('Ошибка\n')
             exit(0)
         a = bin(a)[:1:-1]
         j = []
@@ -50,12 +35,11 @@ def main(f_name_out,m_d,n,args):
             rez = int(tmp, 2)
             if del_m:
                 rez = d_m(rez, m_d)
-            monitor(cout, n)
             wri_fale(f_name_out, rez)
             cout +=1
     except FileNotFoundError:
-        stdout.write('Файл не найден\n')
+        print('Файл не найден\n')
         exit(0)
     except:
-        stdout.write('Ошибка\n')
+        print('Ошибка\n')
         exit(0)
