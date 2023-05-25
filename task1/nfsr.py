@@ -1,81 +1,29 @@
+from lfsr import lfsr
 from help import *
 
 
-def main(f_name_out,m_d,c,args):
+def main1(f_name_out, m_d, c, args):
     f = open(f_name_out, 'w')
     f.close()
-    init = args
     del_m = False
     try:
-        cout = 1
-        if m_d != "No":
-            del_m = True
-            m_d = int(m_d)
-        k = int(init[0])
-        w = int(init[1])
-        if k < 0:
-            print('Ошибка\n')
-            exit(0)
-        p = []
-        x = []
-        m = []
-        j = []
-        j2 = []
-        f = 2
-        for i in range(k):
-            p.append(int(init[f]))
-            t = bin(init[f + 1])[:1:-1]
-            j.append([z+1 for z in range(len(t)) if t[z] == '1'])
-            x.append(int(init[f + 2]))
-            m.append(len(j[i]))
-            f += 3
-        q = 0
-        for i in range(3 * k + 2, len(init)):
-            q += 1
-            t = bin(init[i])[2:]
-            t = "0" * (k - len(t)) + t
-            t = t[::-1]
-            j2.append(t)
-        rslos_arr = []
-        for i in range(k):
-            x_bin = bin(x[i])[2:]
-            x_bin = '0' * (p[i] - len(x_bin) + 1) + x_bin
-            x_res = x_bin
-            for r in range(int(c * w / p[i] + 1)):
-                for s in range(p[i]):
-                    x_new = 0
-                    for t in range(m[i]):
-                        temp = r * p[i] + s + j[i][t]
-                        x_new += int(x_res[temp])
-                        x_new %= 2
-                    x_res += str(x_new)
-            rslos_arr.append(x_res[len(x_bin):])
-        for o in range(c):
-            res = ''
-            for s in range(w):
-                x_new = 0
-                bits = list(map(lambda b: b[w * o + s], rslos_arr))
-                for r in range(q):
-                    bit_tmp = []
-                    for t in range(len(bits)):
-                        if j2[r][t] == '0':
-                            bit_tmp.append('1')
-                        else:
-                            bit_tmp.append(bits[t])
-                    q_tmp = int(bit_tmp[0])
-                    for u in range(1, len(bit_tmp)):
-                        q_tmp &= int(bit_tmp[u])
-                    x_new ^= q_tmp
-                res += str(x_new)
-            rez1 = int(res, 2)
+        r1 = lfsr(c, [args[0], args[4]], m_d)
+        r2 = lfsr(c, [args[1], args[5]], m_d)
+        r3 = lfsr(c, [args[2], args[6]], m_d)
+        w1 = 0
+        for i in range(int(args[3])):
+            w1 = set_bit(w1, i, 1)
+        for i in range(c):
+            a = r1[i]
+            b = r2[i]
+            c = r3[i]
+            rez = (a ^ b + b ^ c + c) & w1
             if del_m:
-                rez = d_m(rez1, m_d)
-            wri_fale(f_name_out, rez1)
-            cout += 1
+                rez = d_m(rez, m_d)
+            wri_fale(f_name_out, rez)
     except FileNotFoundError:
         print('Файл не найден\n')
         exit(0)
     except :
         print('Ошибка\n')
         exit(0)
-

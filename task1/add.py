@@ -20,9 +20,9 @@ def main(f_name_out,m_d,n,args):
             exit(0)
         l = len(args)
         for i in range(0, int(l / 2)):
-            a_s.append(args[i])
+            a_s.append(int(args[i]))
         for i in range(int(l / 2), l):
-            x_s.append(args[i])
+            x_s.append(int(args[i]))
         if c < 0 or m < 0:
             print('Ошибка\n')
             exit(0)
@@ -31,7 +31,7 @@ def main(f_name_out,m_d,n,args):
         for q in range(n):
             rez = 0
             for w in range(len(a_s)):
-                rez += a_s[w]  * x_s[q + w]
+                rez += a_s[w] * x_s[q + w]
             rez = (rez + c) % m
             if del_m:
                 rez = d_m(rez, m_d)

@@ -46,7 +46,7 @@ def pare_args(mass):
     try:
         rez = []
         for key in mass:
-            tmp = int(key,0)
+            tmp = str(key)
             rez.append(tmp)
         return rez
     except:
@@ -106,8 +106,6 @@ for i in range(0, len(b), 1):
         cnt += 1
         for j in range (1, len(b) - cnt, 1):
             a.append(b[i + j])
-
-
 try:
     args = []
     consol_out = False
@@ -141,39 +139,21 @@ try:
     if file_out == "":
         file_out = "rnd.dat"
     if code == "lc":
-        if len(new_a) != 4:
-            stdout.write('Ошибка\n')
-            exit(0)  
         lc.main(file_out,m,n,new_a)
     if code == "add":
         add.main(file_out,m,n,new_a)
     if code == "lfsr":
-        if len(new_a) != 4:
-            stdout.write('Ошибка\n')
-            exit(0)  
         lfsr.main(file_out,m,n,new_a)
     if code == "5p":
-        if len(new_a) != 6:
-            stdout.write('Ошибка\n')
-            exit(0)  
         fp.main(file_out,m,n,new_a)
     if code == "rsa":
-        if len(new_a) != 5:
-            stdout.write('Ошибка\n')
-            exit(0)  
         rsa.main(file_out,m,n,new_a)
     if code == "bbs":
-        if len(new_a) != 3:
-            stdout.write('Ошибка\n')
-            exit(0)  
         bbs.main(file_out,m,n,new_a)
     if code == "rc4":
-        if len(new_a) != 257:
-            stdout.write('Ошибка\n')
-            exit(0)  
         rc4.main(file_out,m,n,new_a)
     if code == "nfsr":
-        nfsr.main(file_out,m,n,new_a)
+        nfsr.main1(file_out,m,n,new_a)
     if code == "mt":
         mt.main(file_out,m,n,new_a)
 except FileNotFoundError:

@@ -6,25 +6,17 @@ def main(f_name_out,m_d,c,args):
     f.close()
     del_m = False
     try:
-        cout = 1
         if m_d != "No":
             del_m = True
             m_d = int(m_d)
-        n, x, l = list(map(int, args))
-        if n < 0 or l < 0 or x < 0 or x >= n:
-            print('Ошибка\n')
-            exit(0)
+        x = int(args[0])
+        n = 16637
         for i in range(c):
-            s = ""
-            for j in range(l):
-                x = pow(x, 2, n)
-                x_bin = bin(x)
-                s += x_bin[-1]
-            rez = int(s,2)
+            rez = (x ** 2) % n
+            x = rez
             if del_m:
                 rez = d_m(rez, m_d)
             wri_fale(f_name_out, rez)
-            cout +=1
     except FileNotFoundError:
         print('Файл не найден\n')
         exit(0)

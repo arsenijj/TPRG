@@ -10,7 +10,7 @@ def main(f_name_out,m_d,c,args):
         if m_d != "No":
             del_m = True
             m_d = int(m_d)
-        w = args[0]
+        w = int(args[0])
         del args[0]
         k = [int(args[i]) for i in range(len(args))]
         s = list(range(256))
@@ -45,4 +45,3 @@ def main(f_name_out,m_d,c,args):
     except:
         print('Ошибка\n')
         exit(0)
-        
